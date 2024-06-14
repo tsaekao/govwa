@@ -5,6 +5,7 @@ jobs:
   static_analysis:
     name: Static Analysis
     runs-on: ubuntu-latest
+    
     env:
         VERACODE_API_KEY_ID: ${{ secrets.VERACODE_API_ID }}
         VERACODE_API_KEY_SECRET: ${{ secrets.VERACODE_API_KEY }}
@@ -12,6 +13,11 @@ jobs:
     steps:
       - name: Check out main branch
         uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+            go-version: '>=1.17.0'
 
       - name: Download CLI
         uses: wei/curl@master
